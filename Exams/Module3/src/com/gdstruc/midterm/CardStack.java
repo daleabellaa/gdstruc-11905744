@@ -2,40 +2,42 @@ package com.gdstruc.midterm;
 
 import java.util.EmptyStackException;
 
-public class ArrayStack {
-    private Player[] stack;
+public class CardStack {
+    private Card[] stack;
     private int top;
+    private int count;
 
-    public ArrayStack(int capacity)
+    public CardStack(int capacity)
     {
-        stack = new Player[capacity];
+        stack = new Card[capacity];
     }
 
-    public void push(Player player)
+    public void push(Card card)
     {
         if (top == stack.length)
         {
-            Player[] newStack = new Player[2 * stack.length];
+            Card[] newStack = new Card[2 * stack.length];
             System.arraycopy(stack, 0,newStack, 0, stack.length);
             stack = newStack;
         }
 
-        stack[top++] = player;
+        stack[top++] = card;
     }
 
-    public Player pop()
+    public Card pop()
     {
         if (isEmpty())
         {
             throw new EmptyStackException();
         }
 
-        Player poppedPlayer = stack[--top];
+        Card poppedCard = stack[--top];
         stack[top] = null;
-        return poppedPlayer;
+        return poppedCard;
+
     }
 
-    public Player peek()
+    public Card peek()
     {
         if (isEmpty())
         {
@@ -52,10 +54,18 @@ public class ArrayStack {
 
     public void printStack()
     {
-        System.out.println("Printing stack:");
-
         for (int i = top - 1; i >= 0; i-- ) {
             System.out.println(stack[i]);
         }
+    }
+
+    public int getCount()
+    {
+        int number = 0;
+        for (int i = top - 1; i >= 0; i-- ) {
+            number++;
+        }
+        count = number;
+        return count;
     }
 }
